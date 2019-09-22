@@ -2,24 +2,18 @@ package com.skilldistillery.foodtrucks;
 
 import java.util.Scanner;
 
-
-
 public class FoodTruckApp {
 
 	Scanner kb = new Scanner(System.in);
 	static boolean isChoose;
 	FoodTruck[] foodTrucks = new FoodTruck [5];
 	
-			
 	public static void main(String[] args) {
 		
-		
 		FoodTruckApp methodCall = new FoodTruckApp();
-//		FoodTruck fT1 = new FoodTruck();
-//		FoodTruck fT2 = new FoodTruck(002, "DosBrosTacos", "Mexican", 4);
-		
-//		System.out.println(fT2.getName());
-		
+
+		System.out.println("Welcome to Food Truck App"
+				+ " ,please select an option 1-5 below");
 		do {
 			isChoose = true;
 			
@@ -39,27 +33,26 @@ public class FoodTruckApp {
 		
 			switch (choice) {
 				
-				case 1:
-					
+				case 1:			
 					newEntry();
-					break;
-				
-				case 2:
-					
+					break;	
+				case 2:			
 					listAll();
 					break;
-
-				case 3: //see avg rating of food trucks
-				
+				case 3: //see avg rating of food trucks	
 					printFoodTruckRating();
 					break;
 				case 4:	//display highest rated food truck
-				
+					highestRated();
+					break;
 				case 5: //quit program
 					isChoose = false;
-					break;			
-				}
-			}		
+					break;	
+				default:
+					System.out.println("Invalid selection, choose again 1-5");
+					break;
+			}
+		}		
 		
 	void printMenu() {
 		System.out.println("1: Add foodtruck");
@@ -79,7 +72,7 @@ public class FoodTruckApp {
 			}
 		}
 		avg = total / (ratingCounter);
-		System.out.println("Average: " + avg); 
+		System.out.println("Overall Average rating: " + avg); 
 	}
 	void listAll() {
 		for (int i = 0; i < foodTrucks.length ; i++)
@@ -117,7 +110,18 @@ public class FoodTruckApp {
 			
 			System.out.print("assigning inputed values for");
 			System.out.println(" unique Id: " + foodTrucks[i+1].getUniqueId());
-			System.out.println("enter next food truck entry or type quit");
+			System.out.println("Enter next food truck entry or type quit");
 		}
+	}
+	void highestRated() {
+		double highest = 0;
+		String highestName = "foodtruck" ;
+		for (int i = 0; i < foodTrucks.length ; i++) {
+			if (foodTrucks[i].getRating() > highest) {
+				highest = foodTrucks[i].getRating();
+				highestName = foodTrucks[i].getName() ;
+			}
+		}
+		System.out.println("Best food truck is: " + highestName + " " + highest);
 	}
 }

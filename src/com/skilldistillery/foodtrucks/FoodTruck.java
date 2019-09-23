@@ -1,7 +1,7 @@
 package com.skilldistillery.foodtrucks;
 
 public class FoodTruck {
-	private int uniqueId;
+	static private int uniqueId;
 	private String name;
 	private String foodType;
 	private double rating;
@@ -11,7 +11,7 @@ public class FoodTruck {
 
 	public FoodTruck(int uniqueId, String name, String foodType, double rating) {
 		super();
-		this.uniqueId = uniqueId;
+		FoodTruck.uniqueId = uniqueId;
 		this.name = name;
 		this.foodType = foodType;
 		this.rating = rating;
@@ -22,7 +22,7 @@ public class FoodTruck {
 	}
 
 	public void setUniqueId(int uniqueId) {
-		this.uniqueId = uniqueId;
+		FoodTruck.uniqueId = uniqueId;
 	}
 
 	public String getName() {

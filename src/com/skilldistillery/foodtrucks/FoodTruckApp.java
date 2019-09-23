@@ -6,14 +6,14 @@ public class FoodTruckApp {
 
 	Scanner kb = new Scanner(System.in);
 	static boolean isChoose;
-	FoodTruck[] foodTrucks = new FoodTruck [5];
+	FoodTruck[] foodTrucks = new FoodTruck [6];
 	
 	public static void main(String[] args) {
 		
 		FoodTruckApp methodCall = new FoodTruckApp();
 
-		System.out.println("Welcome to Food Truck App"
-				+ " ,please select an option 1-5 below");
+		System.out.println("Welcome to Food Truck App,"
+				+ " please select an option 1-5 below");
 		do {
 			isChoose = true;
 			
@@ -65,7 +65,10 @@ public class FoodTruckApp {
 		double total = 0.0, avg = 0.0;
 		int i = 0, ratingCounter = 0;
 		for (i = 0; i < foodTrucks.length ; i++) {
-		
+			if (foodTrucks[0] == null) {
+				System.out.println("No reviews yet");
+				break;
+			}
 			if (foodTrucks[i].getRating() > 0.5) {
 				total = total + foodTrucks[i].getRating();
 				ratingCounter ++;
@@ -75,13 +78,17 @@ public class FoodTruckApp {
 		System.out.println("Overall Average rating: " + avg); 
 	}
 	void listAll() {
-		for (int i = 0; i < foodTrucks.length ; i++)
-		
+		for (int i = 0; i < foodTrucks.length ; i++) {
+			if (foodTrucks[0] == null) {
+				System.out.println("No reviews yet");
+				break;
+			}
 			if (foodTrucks[i].getName() != null) {
 			System.out.println("Name: " + foodTrucks[i].getName() + 
 				"  Food Type: " + foodTrucks[i].getFoodType() +
 				"  Rating: " + foodTrucks[i].getRating() );
 			}
+		}
 	}
 	
 	void newEntry() {
@@ -93,13 +100,18 @@ public class FoodTruckApp {
 		}
 		
 		for (int i = 0; i < foodTrucks.length ; i++) {
+			if (i == 5) {
+				System.out.println("Five foodtrucks entered, can't review more, "
+						+ "adding another foodtruck will delete previous entries");
+				break;
+			}
 			System.out.println("Enter name of food truck: ");
 			String name = kb.next();
-		if (name.equals("quit")) 
-		break;
+				if (name.equals("quit")) 
+					break;
 			System.out.println("What is the food type?: ");
 			String foodType = kb.next();
-			System.out.println("Rating from 1-5: ");
+			System.out.println("Rating from 1(bad)-5(best): ");
 			int rating = kb.nextInt();
 			
 		
@@ -109,14 +121,19 @@ public class FoodTruckApp {
 			foodTrucks[i].setRating(rating);
 			
 			System.out.print("assigning inputed values for");
-			System.out.println(" unique Id: " + foodTrucks[i+1].getUniqueId());
+			System.out.println(" unique Id: " + foodTrucks[i].getUniqueId());
 			System.out.println("Enter next food truck entry or type quit");
 		}
 	}
 	void highestRated() {
 		double highest = 0;
-		String highestName = "foodtruck" ;
+		String highestName = "none" ;
+		
 		for (int i = 0; i < foodTrucks.length ; i++) {
+			if (foodTrucks[0] == null) {
+				System.out.println("No foodtrucks have been reviewed yet");
+				break;
+			}
 			if (foodTrucks[i].getRating() > highest) {
 				highest = foodTrucks[i].getRating();
 				highestName = foodTrucks[i].getName() ;
